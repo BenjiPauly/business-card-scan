@@ -1,0 +1,12 @@
+{
+  "name": "business-card-scan",
+  "version": "1.0.0",
+  "description": "Business card scanner web app: photo or camera in, parsed fields out to a Google Sheet",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "sample": "python3 test/make-sample-card.py",
+    "test": "node test/run-test.js"
+  },
+  "engines": { "node": ">=18" }
+}

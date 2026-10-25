@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Card Scanner</title>
+  <meta name="theme-color" content="#1f3a5f">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script defer src="config.js"></script>
+  <script defer src="parser.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Card Scanner</h1>
+    <button id="settingsBtn" class="ghost" aria-label="Settings">Settings</button>
+  </header>
+
+  <main>
+    <section id="drop" class="drop">
+      <p class="lead">Scan business cards into your sheet</p>
+      <div class="actions">
+        <button id="cameraBtn" class="primary">Scan with camera</button>
+        <button id="fileBtn" class="secondary">Choose images</button>
+      </div>
+      <p class="hint">Or drop images here, or paste with Ctrl+V. Photos are read on this device and never uploaded. Only the text fields go to your sheet.</p>
+      <input id="fileInput" type="file" accept="image/*,.heic,.heif" multiple hidden>
+      <input id="captureInput" type="file" accept="image/*" capture="environment" hidden>
+    </section>
+
+    <div id="toolbar" class="toolbar" hidden>
+      <button id="saveAllBtn" class="primary">Save all to sheet</button>
+      <button id="csvBtn" class="secondary">Download CSV</button>
+      <button id="clearBtn" class="ghost">Clear</button>
+    </div>
+
+    <div id="cards"></div>
+  </main>
+
+  <dialog id="cameraDlg">
+    <video id="video" playsinline muted></video>
+    <div class="dlg-actions">
+      <button id="snapBtn" class="primary">Capture</button>
+      <button id="camCloseBtn" class="ghost">Close</button>
+    </div>
+    <p id="camMsg" class="hint"></p>
+  </dialog>
+
+  <dialog id="settingsDlg">
+    <form method="dialog" id="settingsForm">
+      <h2>Settings</h2>
+      <label>Sheet web app URL
+        <input id="setUrl" type="url" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off">
+      </label>
+      <label>Shared secret (optional)
+        <input id="setToken" type="password" autocomplete="off">
+      </label>
+      <label>OCR languages
+        <input id="setLangs" type="text" placeholder="eng+deu">
+      </label>
+      <p class="hint">Examples: eng, eng+deu, eng+fra+ita. Language data downloads once on first use.</p>
+      <div class="dlg-actions">
+        <button id="testBtn" type="button" class="secondary">Test connection</button>
+        <button value="save" class="primary">Save</button>
+        <button value="cancel" class="ghost">Cancel</button>
+      </div>
+      <p id="setMsg" class="hint"></p>
+    </form>
+  </dialog>
+</body>
+</html>
